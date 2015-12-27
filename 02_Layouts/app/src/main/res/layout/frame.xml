@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Cria um componente para exibiçao de imagem-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/k19_logo"
+        android:layout_gravity="center"/>
+
+    <!-- Cria um componente para exibição de conteúdo -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:text="@string/k19_label"
+        android:textStyle="bold"
+        android:textSize="30dp"/>
+
+</FrameLayout>

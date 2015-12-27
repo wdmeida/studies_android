@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">IntentActions</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name ="menu_settings">Settings</string>
+    <string name ="title_activity_main">MainActivity</string>
+    <string name ="view_site_label">Ver site da K19</string>
+    <string name ="send_email_label">Enviar email de contato</string>
+    <string name ="make_call_label">Fazer ligação</string>
+
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Cria um campo de exibição de texto -->
+    <TextView
+        android:id="@+id/name_label_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textSize="24dp"
+        android:text="@string/name_label"/>
+
+    <!-- Cria um campo para inserçaõ de conteudo -->
+    <EditText
+        android:id="@+id/name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_toRightOf="@+id/name_label_text"/>
+
+    <!-- Cria um botão para executar uma ação. -->
+    <Button
+        android:id="@+id/see_message_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/name_edit_text"
+        android:text="@string/see_message"/>
+
+</RelativeLayout>

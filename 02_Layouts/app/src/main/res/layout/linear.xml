@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Define a orientação e posicionamento do layout a ser criado. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- Cria um compontente para exibição de texto -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/name_label"/>
+
+    <!-- Cria uma caixa para inserção de conteúdo pelo usuário -->
+    <EditText
+        android:id="@+id/name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Cria um botão para que o usuário possa clicar e disparar uma ação. -->
+    <Button
+        android:id="@+id/see_message_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/see_message"/>
+
+    <!-- Cria um componente de texto que exibira o conteúdo inserido pelo usuário
+     assim que este clicar no botão da tela. -->
+    <TextView
+        android:id="@+id/show_message_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/hello_message"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:visibility="invisible"/>
+</LinearLayout>
