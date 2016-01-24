@@ -1,0 +1,11 @@
+<resources>
+    <!-- O arquivo string.xml contém todas as strings que serão usadas na aplicação.
+         Elas são definidas através da chave (name) e cada uma destas tem seu valor. -->
+    <string name="app_name">SqlLite</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="add">Adicionar</string>
+    <string name="no_notes">Nenhuma anotação</string>
+    <string name="write_a_note">Escreva uma anotação</string>
+    <string name="save">Salvar</string>
+</resources>
