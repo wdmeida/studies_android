@@ -40,25 +40,15 @@ public class CustomSQLiteOpenHelper extends SQLiteOpenHelper {
         database.execSQL(DATABASE_CREATE);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /*
+        O método onUpgrade é chamado quando a versão da base de dados é alterada,
+        e nele você deve incluir quaisquer comandos relacionadoas à alteração do
+        esquema, como alterações em tabelas e colunas.
+     */
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        //Apaga a versão antiga da tabela se esta existir e cria uma nova base da dados.
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTES);
+        onCreate(db);
+    }
 }//class CustomSQLiteOpenHelper
