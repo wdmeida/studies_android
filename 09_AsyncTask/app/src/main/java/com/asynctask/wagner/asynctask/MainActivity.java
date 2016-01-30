@@ -43,21 +43,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        //Obtêm a referência dos componentes da activity.
         imageView = (ImageView) findViewById(R.id.image_view);
         startButton = (Button) findViewById(R.id.start_button);
 
+        //Define a ação a ser executada ao clicar no botão Iniciar.
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Define o carregamento da barra de progresso que mostra a porcentagem de download da imagem.
                 dialog = ProgressDialog.show(MainActivity.this,getString(R.string.download),getString(R.string.downloading));
+
+                /*I
+                    Instância o objeto responsável e inicia o download da imagem através
+                    da url recebida pelo método execute().
+                 */
                 task = new DownloadImageTask();
-                task.execute("http://k19.com.br/css/img/main-header-logo.png");
+                task.execute("https://avatars.githubusercontent.com/u/9699741?v=3");
             }
         });
     }//onCreate()
 
+    //Sobrescreve o método a ser executado quando a activity for encerrada.
     @Override
     protected void onDestroy(){
+        //Verifica se a barra de dialogo foi instânciada ou estava sendo exibida, afim de liberar os recursos alocados.
         if (dialog != null && dialog.isShowing()){
             dialog.dismiss();
             dialog = null;
@@ -68,8 +78,15 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }//onDestroy()
 
+    /*
+        Cria uma classe privada extendendo AysncTask que será a responsável por fazer o download da imagem
+        em segundo plano, para não parar a execuçaõ da UI thread (thread main).
+     */
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap>{
-
+        /*
+            O método doInBackground deve ser sobrescrito obrigatóriamente, pois ele será o responsável
+            por executar a tarefa em background, no caso deste exemplo, o download da imagem.
+         */
         @Override
         protected Bitmap doInBackground(String... params){
             try {
@@ -80,12 +97,22 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }//doInBackground()
 
+        /*
+            O método onPreExecute, deve ser sobreescrito, caso alguma tarefa deva ser executada antes
+            da ação em background pela UI thread, no exemplo abaixo, ele apenas exibe a ProgressDialog
+            que mostrará o andamento da execução da tarefa.
+         */
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
             dialog.show();
         }//onPreExecute()
 
+        /*
+            Ao contrário do onPreExecute(), o método onPostExecute() é responsável por determinar a UI thread
+            que execute uma tarefa logo após a tarefa em background ser executada. No exemplo, ele recebe a
+            imagem obtida no download e atribui a area de exibição (ImageView).
+         */
         @Override
         protected void onPostExecute(Bitmap result){
             super.onPostExecute(result);
@@ -93,8 +120,13 @@ public class MainActivity extends AppCompatActivity {
             if (result != null){
                 imageView.setImageBitmap(result);
             }
-        }//onPostExecute(0
+        }//onPostExecute()
 
+        /*
+            O método downloadBitmap() recebe uma String com o endereço da imagem, e retorna um objeto
+            Bitmap com os dados da mesma, caso o endereço recebido seja válido. Caso não seja, retorna
+            null.
+         */
         private Bitmap downloadBitmap(String url) throws IOException{
             URL imageUrl = null;
             try {
