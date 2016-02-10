@@ -66,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    *   Como já citado, para criar os dialog que serão exibidos ao usuário, é necessário criar uma
+    *   classe que herde de DialogFragment.Para dialogos simples, basta sobrescrever o método
+    *   onCreateDialog, como no exemplo abaixo.
+    * */
     public static class AlertDialogFragment extends DialogFragment{
         public static AlertDialogFragment newInstance(){
             AlertDialogFragment frag = new AlertDialogFragment();
@@ -74,17 +79,46 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            /*
+                Cria o gerador do AlertDialog, informando a activity que será utilizada, informando
+                que será a que esta ativa através do método getActivity, e logo após cria o AlertDialog
+                através do método create().
+             */
             AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+
+            //Define o título e a mensagem que será exibida ao usuário.
             dialog.setTitle(getActivity().getString(R.string.attention));
             dialog.setMessage(getActivity().getString(R.string.which_button_gonna_press));
+
+            /*
+                Define a ação a ser executada caso o usuário clique na opção Sim (DialogInterface.BUTTON_POSITIVE).
+                O método setButton() da classe AlertDialog recebe como parâmetros três argumentos:
+                    O botão que está será exibido (DialogInterface.BUTTON_POSITIVE);
+                    A mensagem que será exibida no botão (getActivity().getString(R.string.yes));
+                    A ação a ser executada quando o botão for clicada (new DialogInterface.OnClickListener()...).
+             */
             dialog.setButton(DialogInterface.BUTTON_POSITIVE, getActivity().getString(R.string.yes),
                     new DialogInterface.OnClickListener() {
+                        //Define a ação a ser executada quando o botão for clicado.
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
+                            /*
+                                A classe Toast fornece feedback simples e rápido ao usuário em uma pequena janela.
+                                Essa janela é exibida na quantidade de espaço necessário para a mensagem que foi
+                                determinada, permanecendo vísível por um limite de tempo. Este recurso não tem interação
+                                com o usuário, serve somente para dar informações rápidas.
+
+                                Para instanciar o objeto Toast é necessário a utilização de três parâmetros: contexto, mensagem
+                                e duração. A duração é uma constante existente na classe Toast, tendo como opção LENGTH_SHORT para
+                                curto tempo ou LENGTH_LONG para longo tempo. Para exibir, é utilizado o método show().
+                             */
                             Toast.makeText(getActivity(), R.string.pressed_yes,
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
+
+            //Define a ação a ser executada caso o usuário clique em não.
             dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getActivity().getString(R.string.no),
                     new DialogInterface.OnClickListener(){
                         @Override
@@ -97,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }//class AlertDialogFragment
 
+
     public static class ProgressDialogFragment extends DialogFragment {
         public static ProgressDialogFragment newInstance() {
             ProgressDialogFragment frag = new ProgressDialogFragment();
@@ -105,12 +140,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            //Cria um ProgressDialog, passando como parâmetro o contexto que está sendo executado e define a mensagem.
             Dialog dialog = new ProgressDialog(getActivity());
             dialog.setTitle(R.string.wait);
             return dialog;
         }
     }//class ProgressDialogFragment
 
+    /*
+        Caso o Dialog customizável, além de herdar a classe DialogFragment é necessário que a subclasse
+        sobrescreva os métodos onCreate() e onCreateView().
+     */
     public static class CustomDialogFragment extends DialogFragment {
         public static CustomDialogFragment newInstance() {
             CustomDialogFragment frag = new CustomDialogFragment();
