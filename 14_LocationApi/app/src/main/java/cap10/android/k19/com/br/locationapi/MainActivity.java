@@ -37,7 +37,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Criteria criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, false);
 
-        Location location = locationManager.getLastKnownLocation(provider);
+        Location location = null;
+
+        try {
+            location = locationManager.getLastKnownLocation(provider);
+        } catch (SecurityException e) {
+            throw new SecurityException();
+        }
 
         if (location != null) {
             Log.d(TAG, "Provider " + provider + " foi selecionado.");
@@ -51,13 +57,22 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onResume() {
         super.onResume();
-        locationManager.requestLocationUpdates(provider, 400, 1, this);
+        try {
+            locationManager.requestLocationUpdates(provider, 400, 1, this);
+        } catch (SecurityException e) {
+            throw new SecurityException();
+        }
+
     }//onResume()
 
     @Override
     protected void onPause() {
         super.onPause();
-        locationManager.removeUpdates(this);
+        try {
+            locationManager.removeUpdates(this);
+        } catch (SecurityException e) {
+            throw new SecurityException();
+        }
     }//obPause()
 
     @Override
